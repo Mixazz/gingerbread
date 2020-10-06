@@ -1,25 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Имбирные пряники ручной работы от AnutaCookie</title>
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/style.css" />
     <script src="js/main.js" defer></script>
-</head>
+  </head>
 
-<body>
-    <header>
+  <body>
+    <header class="header">
+      <div class="header__container">
+        <div class="headeer__left">
+          <a class="header-logo" href="./">
+            <img class="header-logo__logo" src="img/logo.png" alt="" />
+            <p class="header-logo__description">
+              Имбирные пряники ручной работы<br />
+              с доставкой по Москве и всей России
+            </p>
+          </a>
+        </div>
+        <div class="header__center">
+          <div class="header-menu">
+            <ul class="header-menu__list">
+              <li class="header-menu__list-item">
+                <a class="header-menu__list-link scroll-to" href="#promo"
+                  >Главная</a
+                >
+              </li>
 
+              <li class="header-menu__list-item">
+                <a
+                  class="header-menu__list-link scroll-to header-menu__list-link_active"
+                  href="#buy-2"
+                  >Расчитать стоимость</a
+                >
+              </li>
+              <li class="header-menu__list-item">
+                <a
+                  class="header-menu__list-link scroll-to header-menu__list-link_active"
+                  href="#buy-2"
+                  >Каталог пряников</a
+                >
+              </li>
+            </ul>
+            <div class="header-contacts header-contacts_mobile"></div>
+          </div>
+        </div>
+        <div class="header__rigth">
+          <div class="header-socials header-socials_desktop">
+            <p class="header-socials__title">
+              Связаться с нами<br />
+              в WhatsApp:
+            </p>
+            <div class="header-socials__items">
+              <a
+                class="header-socials__item header-socials__item_whatsapp"
+                href="#"
+                ><img src="/img/wp.svg" alt=""
+              /></a>
+            </div>
+          </div>
+          <div class="header-menu__open"></div>
+        </div>
+      </div>
     </header>
     <section class="promo">
-
+      <div class="container">
+        <div class="promo__container">
+          <h1>
+            Имбирные пряники ручной работы<br />
+            от AnutaCookie
+          </h1>
+          <div class="promo-advantages">
+            <div class="promo-advantages__item">
+              <div class="promo-advantages__item-col_left">
+                <div class="promo-advantages__item-icon-container">
+                  <img
+                    src="img/mixer.svg"
+                    alt=""
+                    class="promo-advantages__item-icon"
+                  />
+                </div>
+              </div>
+              <div class="promo-advantages__item-right">
+                <p class="promo-advantages__item-title">
+                  Ручная роспись на пряниках
+                </p>
+              </div>
+            </div>
+            <div class="promo-advantages__item">
+              <div class="promo-advantages__item-col_left">
+                <div class="promo-advantages__item-icon-container">
+                  <img
+                    src="img/mixer.svg"
+                    alt=""
+                    class="promo-advantages__item-icon"
+                  />
+                </div>
+              </div>
+              <div class="promo-advantages__item-right">
+                <p class="promo-advantages__item-title">
+                  Пищевая печать на пряниках
+                </p>
+              </div>
+            </div>
+            <div class="promo-advantages__item">
+              <div class="promo-advantages__item-col_left">
+                <div class="promo-advantages__item-icon-container">
+                  <img
+                    src="img/handshake.svg"
+                    alt=""
+                    class="promo-advantages__item-icon"
+                  />
+                </div>
+              </div>
+              <div class="promo-advantages__item-right">
+                <p class="promo-advantages__item-title">Корпоративные заказы</p>
+              </div>
+            </div>
+          </div>
+          <div class="promo__button-container">
+            <button class="button">Быстрый расчет</button>
+          </div>
+        </div>
+      </div>
+      <div class="promo__blackout">
+        <img class="img3" src="img/bg-after.png" alt="" />
+      </div>
     </section>
-    <footer>
-
-    </footer>
-</body>
-
+    <section class="products">
+      <div class="products__category"></div>
+      <div class="container">
+        <h2>Каталог пряников</h2>
+        <div class="products__container">
+          <div class="product">
+            <h3 class="product-h3">Пряники медали</h3>
+            <img class="product-img" src="img/products/img1.jpg" alt="" />
+            <ul class="product__property">
+              <li class="product-count">
+                <p>От 10 шт</p>
+              </li>
+              <li class="product-size">
+                <p>Размер: 10 см</p>
+              </li>
+              <li class="product-price">
+                <p>Цена 130р</p>
+              </li>
+            </ul>
+            <a href="#" class="product__btn">Заказать</a>
+          </div>
+          <div class="product">
+            <h3 class="product-h3">Пряники медали</h3>
+            <img class="product-img" src="img/products/img1.jpg" alt="" />
+            <ul class="product__property">
+              <li class="product-count">
+                <p>От 10 шт</p>
+              </li>
+              <li class="product-size">
+                <p>Размер: 10 см</p>
+              </li>
+              <li class="product-price">
+                <p>Цена 130р</p>
+              </li>
+            </ul>
+            <a href="#" class="btn">Заказать</a>
+          </div>
+          <div class="product">
+            <h3 class="product-h3">Пряники медали</h3>
+            <img class="product-img" src="img/products/img1.jpg" alt="" />
+            <ul class="product__property">
+              <li class="product-count">
+                <p>От 10 шт</p>
+              </li>
+              <li class="product-size">
+                <p>Размер: 10 см</p>
+              </li>
+              <li class="product-price">
+                <p>Цена 130р</p>
+              </li>
+            </ul>
+            <a href="#" class="btn">Заказать</a>
+          </div>
+          <div class="product">
+            <h3 class="product-h3">Пряники медали</h3>
+            <img class="product-img" src="img/products/img1.jpg" alt="" />
+            <ul class="product__property">
+              <li class="product-count">
+                <p>От 10 шт</p>
+              </li>
+              <li class="product-size">
+                <p>Размер: 10 см</p>
+              </li>
+              <li class="product-price">
+                <p>Цена 130р</p>
+              </li>
+            </ul>
+            <a href="#" class="btn">Заказать</a>
+          </div>
+          <div class="product">
+            <h3 class="product-h3">Пряники медали</h3>
+            <img class="product-img" src="img/products/img1.jpg" alt="" />
+            <ul class="product__property">
+              <li class="product-count">
+                <p>От 10 шт</p>
+              </li>
+              <li class="product-size">
+                <p>Размер: 10 см</p>
+              </li>
+              <li class="product-price">
+                <p>Цена 130р</p>
+              </li>
+            </ul>
+            <a href="#" class="btn">Заказать</a>
+          </div>
+          <div class="product">
+            <h3 class="product-h3">Пряники медали</h3>
+            <img class="product-img" src="img/products/img1.jpg" alt="" />
+            <ul class="product__property">
+              <li class="product-count">
+                <p>От 10 шт</p>
+              </li>
+              <li class="product-size">
+                <p>Размер: 10 см</p>
+              </li>
+              <li class="product-price">
+                <p>Цена 130р</p>
+              </li>
+            </ul>
+            <a href="#" class="btn">Заказать</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer></footer>
+  </body>
 </html>
