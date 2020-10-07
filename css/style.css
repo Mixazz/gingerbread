@@ -16,6 +16,7 @@ body {
   max-width: 1200px;
   z-index: 1;
   display: block;
+  text-align: center;
 }
 .progress-line {
   width: 100%;
@@ -290,6 +291,15 @@ body {
   color: #502430;
   font-weight: 400;
   font-style: italic;
+}
+.next-products {
+  display: inline-block;
+  width: 250px;
+  padding: 1rem;
+  border: 2px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 200px;
 }
 @media (max-width: 1180px) {
   .header__center {

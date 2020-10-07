@@ -144,7 +144,6 @@ while ($row = $result->fetch_assoc()) {
     </div>
 
     <div class="container">
-
       <div class="products__container">
         <?php foreach ($products as $item) : ?>
 
@@ -168,6 +167,7 @@ while ($row = $result->fetch_assoc()) {
           </div>
         <?php endforeach; ?>
       </div>
+      <a href="" class="next-products">Показать еще</a>
     </div>
     </div>
   </section>
