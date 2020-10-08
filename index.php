@@ -22,6 +22,7 @@ while ($row = $result->fetch_assoc()) {
 </head>
 
 <body>
+  
   <div class="progress-line"></div>
   <header class="header">
     <div class="header__container">
@@ -45,12 +46,11 @@ while ($row = $result->fetch_assoc()) {
               <a class="header-menu__list-link scroll-to header-menu__list-link_active" href="#buy-2">Расчитать
                 стоимость</a>
             </li>
-            <li class="header-menu__list-item">
+              <li class="header-menu__list-item">
               <a class="header-menu__list-link scroll-to header-menu__list-link_active" href="#buy-2">Каталог
                 пряников</a>
             </li>
           </ul>
-          <div class="header-contacts header-contacts_mobile"></div>
         </div>
       </div>
       <div class="header__rigth">
@@ -60,7 +60,7 @@ while ($row = $result->fetch_assoc()) {
             в WhatsApp:
           </p>
           <div class="header-socials__items">
-            <a class="header-socials__item header-socials__item_whatsapp" href="#"><img src="/img/wp.svg" alt="" /></a>
+            <a class="header-socials__item header-socials__item_whatsapp" href="#"><img src="img/wp.svg" alt="" /></a>
           </div>
         </div>
         <div class="header-menu__open">
@@ -68,6 +68,18 @@ while ($row = $result->fetch_assoc()) {
         </div>
       </div>
     </div>
+    <div class="menu__mobile-wrap">
+    <div class="menu__mobile">
+      <h3>Меню</h3>
+      <ul>
+        <li>Главная</li>
+        <li>Расчитать стоимость</li>
+        <li>Каталаг пряников</li>
+      </ul>
+    </div>
+    <div class="menu__mobile-close">X</div>
+    <div class="menu__overlay"></div>
+  </div>
   </header>
   <section class="promo">
     <div class="container">

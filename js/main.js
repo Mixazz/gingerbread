@@ -110,3 +110,22 @@ function nextProducts(e) {
       goodsList = '';
     });
 }
+
+let btnMenuOpen = document.querySelector(".header-menu__open");
+let mobileMenu = document.querySelector(".menu__mobile-wrap");
+let mobileMenuOverlay = document.querySelector(".menu__overlay");
+let mobileMenuClose = document.querySelector(".menu__mobile-close")
+
+btnMenuOpen.onclick = function () {
+  mobileMenu.style.display = 'block';
+}
+mobileMenuClose.onclick = function () {
+  closeMenu();
+}
+mobileMenuOverlay.onclick = function () {
+  closeMenu();
+}
+
+function closeMenu () {
+  mobileMenu.style.display = 'none';
+}
