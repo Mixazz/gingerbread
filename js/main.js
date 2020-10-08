@@ -126,6 +126,6 @@ mobileMenuOverlay.onclick = function () {
   closeMenu();
 }
 
-function closeMenu () {
+function closeMenu() {
   mobileMenu.style.display = 'none';
 }
