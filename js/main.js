@@ -105,7 +105,7 @@ function showNextProducts(e) {
             `;
       }
       const productsContainer = document.querySelector(".products__container");
-      let goodsList = '';
+      goodsList = '';
       showButtonNextProducts(result);
 
 
