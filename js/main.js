@@ -1,21 +1,51 @@
 
 window.onscroll = () => scroll();
+let categoryNumber;
+let pageProducts;
+let quantityProduct = 12
 
-// Запрос в базу данных
-let caregoryButtons = document.querySelectorAll('.products-category__list li');
-for (let categoryButton of caregoryButtons) {
-  categoryButton.onclick = function (e) {
-    let response = fetch(`components/show_products.php?category=${e.target.dataset.category}`)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (result) {
-        showCaralog(result);
+// Показать товары
+let eventAll = {
+  target: {
+    dataset: {
+      category: "1000",
+    }
+  }
+}
+showFirstProducts(eventAll);
 
-      });
-  };
+let nextProductsBtn = document.querySelector('.next-products');
+if(nextProductsBtn) {
+  nextProductsBtn.onclick = nextProducts;
 }
 
+// Запрос в базу данных по категории
+let caregoryButtons = document.querySelectorAll('.products-category__list li');
+for (let categoryButton of caregoryButtons) {
+  categoryButton.onclick = showFirstProducts;
+  
+}
+
+function showFirstProducts(e) {
+  pageProducts = 0;
+  categoryNumber = e.target.dataset.category;
+  let response = fetch(`components/show_products.php?category=${categoryNumber}`)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (result) {
+      if (result.length < 13) {
+        nextProductsBtn.style.display= 'none';
+      } else {
+        pageProducts +=12;
+        result.pop()
+        nextProductsBtn.style.display= 'inline-block';
+      }
+      
+      showCatalog(result);
+      
+    });
+};
 
 function scroll() {
   const progressLine = document.querySelector('.progress-line');
@@ -26,9 +56,10 @@ function scroll() {
   progressLine.style.width = scrolled + "%";
 }
 
-function showCaralog(goods) {
+function showCatalog(goods) {
   const productsContainer = document.querySelector(".products__container");
-  productsContainer.innerHTML = '';
+  // productsContainer.innerHTML = '';
+  console.log(productsContainer.innerHTML);
   let goodsList = '';
   if (goods.length == 0) {
     goodsList += `
@@ -39,7 +70,7 @@ function showCaralog(goods) {
   for (let item of goods) {
     goodsList += `
         <div class="product">
-            <h3 class="product-h3">Пряники медали</h3>
+            <h3 class="product-h3">${item.title}</h3>
             <div class="product-img__wrap">
               <img class="product-img" src="${item.img_url}" alt="${item.title}" />
             </div>
@@ -65,19 +96,25 @@ function showCaralog(goods) {
 
 
 // Показать еще товары
-const nextProductsBtn = document.querySelector('.next-products');
-nextProductsBtn.onclick = nextProducts;
+
 
 
 function nextProducts(e) {
   e.preventDefault();
-  let response = fetch(`components/next_products.php`)
+  
+  let response = fetch(`components/next_products.php?category=${categoryNumber}&page=${pageProducts}`)
     .then(function (response) {
       return response.json();
     })
     .then(function (result) {
       const productsContainer = document.querySelector(".products__container");
       let goodsList = '';
+      if (result.length < 12) {
+        nextProductsBtn.style.display= 'none';
+      } else {
+        pageProducts +=12;
+        nextProductsBtn.style.display= 'inline-block';
+      }
       if (result.length == 0) {
         goodsList += `
             <string>В данной категории нет товаров!</string>
@@ -87,7 +124,7 @@ function nextProducts(e) {
       for (let item of result) {
         goodsList += `
             <div class="product">
-                <h3 class="product-h3">Пряники медали</h3>
+                <h3 class="product-h3">${item.title}</h3>
                 <div class="product-img__wrap">
                   <img class="product-img" src="${item.img_url}" alt="${item.title}" />
                 </div>

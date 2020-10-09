@@ -1,14 +1,14 @@
-<?php
+<!-- <?php
 require_once('components/db.php');
 // Выборка по категории
 // SELECT * FROM `products` JOIN `category-products` ON `products`.`id`=`category-products`.`id_product` WHERE `category-products`.`id_caregory`=9
-$result = $mysqli->query("SELECT * FROM `products` WHERE 1");
+$result = $mysqli->query("SELECT * FROM `products` WHERE 1 LIMIT 0, 12");
 $products = [];
 while ($row = $result->fetch_assoc()) {
 
   $products[] = $row;
 }
-?>
+?> -->
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -22,7 +22,7 @@ while ($row = $result->fetch_assoc()) {
 </head>
 
 <body>
-
+  
   <div class="progress-line"></div>
   <header class="header">
     <div class="header__container">
@@ -46,7 +46,7 @@ while ($row = $result->fetch_assoc()) {
               <a class="header-menu__list-link scroll-to header-menu__list-link_active" href="#buy-2">Расчитать
                 стоимость</a>
             </li>
-            <li class="header-menu__list-item">
+              <li class="header-menu__list-item">
               <a class="header-menu__list-link scroll-to header-menu__list-link_active" href="#buy-2">Каталог
                 пряников</a>
             </li>
@@ -69,17 +69,17 @@ while ($row = $result->fetch_assoc()) {
       </div>
     </div>
     <div class="menu__mobile-wrap">
-      <div class="menu__mobile">
-        <h3>Меню</h3>
-        <ul>
-          <li>Главная</li>
-          <li>Расчитать стоимость</li>
-          <li>Каталаг пряников</li>
-        </ul>
-      </div>
-      <div class="menu__mobile-close">X</div>
-      <div class="menu__overlay"></div>
+    <div class="menu__mobile">
+      <h3>Меню</h3>
+      <ul>
+        <li>Главная</li>
+        <li>Расчитать стоимость</li>
+        <li>Каталаг пряников</li>
+      </ul>
     </div>
+    <div class="menu__mobile-close">X</div>
+    <div class="menu__overlay"></div>
+  </div>
   </header>
   <section class="promo">
     <div class="container">
@@ -138,7 +138,7 @@ while ($row = $result->fetch_assoc()) {
       <h2>Каталог пряников</h2>
       <div class="products-category">
         <ul class="products-category__list">
-          <li data-category="1000">Все пряники</li>
+          <li class="all-products" data-category="1000">Все пряники</li>
           <li data-category="1">Корпоративные</li>
           <li data-category="2">14 ферваля</li>
           <li data-category="3">23 ферваля</li>
@@ -157,29 +157,8 @@ while ($row = $result->fetch_assoc()) {
 
     <div class="container">
       <div class="products__container">
-        <?php foreach ($products as $item) : ?>
-
-          <div class="product">
-            <h3 class="product-h3">Пряники медали</h3>
-            <div class="product-img__wrap">
-              <img class="product-img" src="<?= $item['img_url'] ?>" alt="<?= $item['title'] ?>" />
-            </div>
-            <ul class="product__property">
-              <li class="product-count">
-                <p><?= $item['p_count'] ?></p>
-              </li>
-              <li class="product-size">
-                <p><?= $item['p_seze'] ?></p>
-              </li>
-              <li class="product-price">
-                <p><?= $item['p_price'] ?></p>
-              </li>
-            </ul>
-            <a href="#" class="product__btn">Заказать</a>
-          </div>
-        <?php endforeach; ?>
       </div>
-      <a href="" class="next-products">Показать еще</a>
+      <a href="" class="next-products" data-start="0">Показать еще</a>
     </div>
     </div>
   </section>
