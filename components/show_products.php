@@ -1,12 +1,13 @@
 <?php
 require_once('db.php');
-if (!$_GET['category']) {
-    exit("Неверные данные");
-}
-
+$category = $_GET['category'];
+$page = $_GET['page'];
+// Выборка по категории
+// SELECT * FROM `products` JOIN `category-products` ON `products`.`id`=`category-products`.`id_product` WHERE `category-products`.`id_caregory`=9
 
 if ($_GET['category'] == 1000) {
-    $result = $mysqli->query("SELECT * FROM `products` WHERE 1 LIMIT 0, 13");
+
+    $result = $mysqli->query("SELECT * FROM `products` WHERE 1 LIMIT $page, 13");
     $products = [];
     while ($row = $result->fetch_assoc()) {
 
@@ -14,9 +15,7 @@ if ($_GET['category'] == 1000) {
     }
     exit(json_encode($products));
 }
-
-$categody_id = $_GET['category'];
-$result = $mysqli->query("SELECT * FROM `products` JOIN `category-products` ON `products`.`id`=`category-products`.`id_product` WHERE `category-products`.`id_caregory`=$categody_id LIMIT 0, 13");
+$result = $mysqli->query("SELECT * FROM `products` JOIN `category-products` ON `products`.`id`=`category-products`.`id_product` WHERE `category-products`.`id_caregory`=$category LIMIT $page, 13");
 $products = [];
 while ($row = $result->fetch_assoc()) {
 

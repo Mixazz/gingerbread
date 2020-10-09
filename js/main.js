@@ -2,7 +2,7 @@
 window.onscroll = () => scroll();
 let categoryNumber;
 let pageProducts;
-let quantityProduct = 12
+let quantityProduct = 12;
 
 // Показать товары
 let eventAll = {
@@ -15,48 +15,34 @@ let eventAll = {
 showFirstProducts(eventAll);
 
 let nextProductsBtn = document.querySelector('.next-products');
-if(nextProductsBtn) {
-  nextProductsBtn.onclick = nextProducts;
+if (nextProductsBtn) {
+  nextProductsBtn.onclick = showNextProducts;
 }
 
 // Запрос в базу данных по категории
 let caregoryButtons = document.querySelectorAll('.products-category__list li');
 for (let categoryButton of caregoryButtons) {
   categoryButton.onclick = showFirstProducts;
-  
+
 }
 
 function showFirstProducts(e) {
   pageProducts = 0;
   categoryNumber = e.target.dataset.category;
-  let response = fetch(`components/show_products.php?category=${categoryNumber}`)
+  let response = fetch(`components/show_products.php?category=${categoryNumber}&page=${pageProducts}`)
     .then(function (response) {
       return response.json();
     })
     .then(function (result) {
-      if (result.length < 13) {
-        nextProductsBtn.style.display= 'none';
-      } else {
-        pageProducts +=12;
-        result.pop()
-        nextProductsBtn.style.display= 'inline-block';
-      }
-      
-      showCatalog(result);
-      
+      showButtonNextProducts(result);
+      createProducts(result);
+
     });
 };
 
-function scroll() {
-  const progressLine = document.querySelector('.progress-line');
-  progressLine.style.display = 'block';
-  let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-  let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  let scrolled = (winScroll / height) * 100;
-  progressLine.style.width = scrolled + "%";
-}
 
-function showCatalog(goods) {
+
+function createProducts(goods) {
   const productsContainer = document.querySelector(".products__container");
   // productsContainer.innerHTML = '';
   console.log(productsContainer.innerHTML);
@@ -94,32 +80,34 @@ function showCatalog(goods) {
 }
 
 
+function showButtonNextProducts(result) {
+  if (result.length < 13) {
+    nextProductsBtn.style.display = 'none';
+  } else {
+    pageProducts += 12;
+    result.pop()
+    nextProductsBtn.style.display = 'inline-block';
+  }
 
-// Показать еще товары
+}
 
 
-
-function nextProducts(e) {
+function showNextProducts(e) {
   e.preventDefault();
-  
-  let response = fetch(`components/next_products.php?category=${categoryNumber}&page=${pageProducts}`)
+  let response = fetch(`components/show_products.php?category=${categoryNumber}&page=${pageProducts}`)
     .then(function (response) {
       return response.json();
     })
     .then(function (result) {
-      const productsContainer = document.querySelector(".products__container");
-      let goodsList = '';
-      if (result.length < 12) {
-        nextProductsBtn.style.display= 'none';
-      } else {
-        pageProducts +=12;
-        nextProductsBtn.style.display= 'inline-block';
-      }
       if (result.length == 0) {
         goodsList += `
             <string>В данной категории нет товаров!</string>
             `;
       }
+      const productsContainer = document.querySelector(".products__container");
+      let goodsList = '';
+      showButtonNextProducts(result);
+
 
       for (let item of result) {
         goodsList += `
@@ -147,6 +135,16 @@ function nextProducts(e) {
       goodsList = '';
     });
 }
+
+function scroll() {
+  const progressLine = document.querySelector('.progress-line');
+  progressLine.style.display = 'block';
+  let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  let scrolled = (winScroll / height) * 100;
+  progressLine.style.width = scrolled + "%";
+}
+
 
 let btnMenuOpen = document.querySelector(".header-menu__open");
 let mobileMenu = document.querySelector(".menu__mobile-wrap");
