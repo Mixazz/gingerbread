@@ -22,7 +22,38 @@ while ($row = $result->fetch_assoc()) {
 </head>
 
 <body>
-  
+  <div class="menu__mobile-wrap">
+    <div class="menu__mobile">
+      <h3>Меню</h3>
+      <ul>
+        <li>Главная</li>
+        <li>Расчитать стоимость</li>
+        <li>Каталаг пряников</li>
+      </ul>
+    </div>
+    <div class="menu__mobile-close">X</div>
+    <div class="menu__overlay"></div>
+  </div>
+  <div class="order-wrap">
+    <div class="order-form-wrap">
+      <div class="order-close">X</div>
+      <h4>Отправить заявку</h4>
+      <p>В форму заявки напишите ваше пожелание по пряникам их количеству, размерам и т.п.
+или название желаемого набора.</p>
+<p>И я свяжусь с вами в ближайшее время для уточнения информации.</p>
+      <form action="components/to_mail.php" method="POST"  class="order-form">
+        <input type="text" class="input" name="name" placeholder="Введите ваше имя">
+        <input type="text" class="input" name="phone" placeholder="Введите ваш телефон">
+        <textarea name="msg" class="input" id="" cols="30" rows="7"></textarea>
+        <input type="text" name="data-procuct" hidden>
+        <input type="submit" class="order-button" name="submit" value="Отправить заявку">
+        
+      </form>
+    </div>
+    
+    <div class="order-overlay"></div>
+  </div>
+
   <div class="progress-line"></div>
   <header class="header">
     <div class="header__container">
@@ -68,18 +99,7 @@ while ($row = $result->fetch_assoc()) {
         </div>
       </div>
     </div>
-    <div class="menu__mobile-wrap">
-    <div class="menu__mobile">
-      <h3>Меню</h3>
-      <ul>
-        <li>Главная</li>
-        <li>Расчитать стоимость</li>
-        <li>Каталаг пряников</li>
-      </ul>
-    </div>
-    <div class="menu__mobile-close">X</div>
-    <div class="menu__overlay"></div>
-  </div>
+
   </header>
   <section class="promo">
     <div class="container">
@@ -165,8 +185,23 @@ while ($row = $result->fetch_assoc()) {
   <section class="clients"></section>
   <section class="order"></section>
   <footer>
-    <div class="conrainer">
-
+  <div class="container">
+      <div class="footer-block">
+        <div class="footer-logo">
+          <img src="img/logo.png" alt="Logo">
+        </div>
+        <nav class="footer-nav">
+          <a href="#" class="footer-link">Корпоративные заказы</a>
+          <a href="#" class="footer-link">Имбирные пряники на свадьбу</a>
+          <a href="#" class="footer-link">Пищевая печать на пряниках</a>
+          <a href="#" class="footer-link">Пряники ручной работы</a>
+        </nav>
+        <div class="social-links">
+          <a href="" class="social-link"><img src="img/instagram.svg" alt="instagram"></a>
+          <a href="" class="social-link"><img src="img/facebook.svg" alt="facebook"></a>
+          <a href="" class="social-link"><img src="img/vk.svg" alt="vkontakte"></a>
+        </div>
+      </div>
     </div>
   </footer>
 </body>
