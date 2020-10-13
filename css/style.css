@@ -422,7 +422,10 @@ body {
   align-items: center;
   justify-content: space-between;
 }
-
+footer {
+  padding: 30px;
+  background-color: #442931;
+}
 .footer-logo {
   flex-basis: 15%;
 }

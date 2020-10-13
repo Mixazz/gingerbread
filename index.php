@@ -1,14 +1,14 @@
 <!-- <?php
-require_once('components/db.php');
-// Выборка по категории
-// SELECT * FROM `products` JOIN `category-products` ON `products`.`id`=`category-products`.`id_product` WHERE `category-products`.`id_caregory`=9
-$result = $mysqli->query("SELECT * FROM `products` WHERE 1 LIMIT 0, 12");
-$products = [];
-while ($row = $result->fetch_assoc()) {
+      require_once('components/db.php');
+      // Выборка по категории
+      // SELECT * FROM `products` JOIN `category-products` ON `products`.`id`=`category-products`.`id_product` WHERE `category-products`.`id_caregory`=9
+      $result = $mysqli->query("SELECT * FROM `products` WHERE 1 LIMIT 0, 12");
+      $products = [];
+      while ($row = $result->fetch_assoc()) {
 
-  $products[] = $row;
-}
-?> -->
+        $products[] = $row;
+      }
+      ?> -->
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -39,18 +39,18 @@ while ($row = $result->fetch_assoc()) {
       <div class="order-close">X</div>
       <h4>Отправить заявку</h4>
       <p>В форму заявки напишите ваше пожелание по пряникам их количеству, размерам и т.п.
-или название желаемого набора.</p>
-<p>И я свяжусь с вами в ближайшее время для уточнения информации.</p>
-      <form action="components/to_mail.php" method="POST"  class="order-form">
-        <input type="text" class="input" name="name" placeholder="Введите ваше имя">
-        <input type="text" class="input" name="phone" placeholder="Введите ваш телефон">
+        или название желаемого набора.</p>
+      <p>И я свяжусь с вами в ближайшее время для уточнения информации.</p>
+      <form action="components/to_mail.php" method="POST" class="order-form">
+        <input type="text" class="input" name="name" placeholder="Введите ваше имя" required>
+        <input type="phone" class="input" name="phone" placeholder="Введите ваш телефон" required>
         <textarea name="msg" class="input" id="" cols="30" rows="7"></textarea>
         <input type="text" name="data-procuct" hidden>
         <input type="submit" class="order-button" name="submit" value="Отправить заявку">
-        
+
       </form>
     </div>
-    
+
     <div class="order-overlay"></div>
   </div>
 
@@ -77,7 +77,7 @@ while ($row = $result->fetch_assoc()) {
               <a class="header-menu__list-link scroll-to header-menu__list-link_active" href="#buy-2">Расчитать
                 стоимость</a>
             </li>
-              <li class="header-menu__list-item">
+            <li class="header-menu__list-item">
               <a class="header-menu__list-link scroll-to header-menu__list-link_active" href="#buy-2">Каталог
                 пряников</a>
             </li>
@@ -185,7 +185,7 @@ while ($row = $result->fetch_assoc()) {
   <section class="clients"></section>
   <section class="order"></section>
   <footer>
-  <div class="container">
+    <div class="container">
       <div class="footer-block">
         <div class="footer-logo">
           <img src="img/logo.png" alt="Logo">

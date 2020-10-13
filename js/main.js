@@ -1,14 +1,15 @@
-      class Product {
-        constructor(id,title, count, size, price, img_url) {
-        this.id = id;
-        this.title = title;
-        this.p_count = count;
-        this.p_seze = size;
-        this.p_price = price;
-        this.img_url = img_url;
-        this.elem = document.createElement("div");
-        this.elem.classList.add('product');
-        this.elem.innerHTML = `<h3 class="product-h3">${this.title}</h3>
+class Product {
+  constructor(id, title, count, size, price, img_url, show_product) {
+    this.id = id;
+    this.title = title;
+    this.p_count = count;
+    this.p_seze = size;
+    this.p_price = price;
+    this.img_url = img_url;
+    this.show_product = show_product;
+    this.elem = document.createElement("div");
+    this.elem.classList.add('product');
+    this.elem.innerHTML = `<h3 class="product-h3">${this.title}</h3>
                 <div class="product-img__wrap">
                   <img class="product-img" src="${this.img_url}" alt="${this.title}" />
                 </div>
@@ -24,24 +25,24 @@
                   </li>
                 </ul>
                 <a href="#" class="product__btn" data-id="${this.id}">Заказать</a>`;
-                
-      } 
-      openOrderWindow(e) {
-        e.preventDefault();
-        console.log(this.id);
-        orderPopUp.style.display = "flex";
-        let dataProduct = document.querySelector("[name=data-procuct]");
-        dataProduct.value = `${this.title}, ${this.p_price}`;
-      }
-      
-    }
+
+  }
+  openOrderWindow(e) {
+    e.preventDefault();
+    console.log(this.id);
+    orderPopUp.style.display = "flex";
+    let dataProduct = document.querySelector("[name=data-procuct]");
+    dataProduct.value = `${this.title}, ${this.p_price}`;
+  }
+
+}
 window.onscroll = () => scroll();
 let categoryNumber;
 let pageProducts;
 let quantityProduct = 12;
 
 
-let orderPopUp = document.querySelector (".order-wrap");
+let orderPopUp = document.querySelector(".order-wrap");
 let productBtn = document.querySelector(".product__btn");
 let orderClose = document.querySelector(".order-close");
 let orderOverlay = document.querySelector(".menu__overlay");
@@ -50,7 +51,7 @@ orderClose.onclick = closeOrderWindow;
 orderClose.onclick = closeOrderWindow;
 
 function closeOrderWindow() {
-    orderPopUp.style.display = "none";
+  orderPopUp.style.display = "none";
 };
 
 
@@ -100,16 +101,17 @@ function createProducts(goods) {
     productsContainer.innerHTML = `
         <string>В данной категории нет товаров!</string>
         `;
-        return;
+    return;
   }
 
   for (let item of goods) {
-    item = new Product(item.id, item.title, item.p_count, item.p_seze, item.p_price, item.img_url);
+    item = new Product(item.id, item.title, item.p_count, item.p_seze, item.p_price, item.img_url, item.show_product);
     // goodsList;
+    console.log(item.show_product);
     productsContainer.append(item.elem);
     let orderBtn = item.elem.querySelector(".product__btn");
     orderBtn.onclick = item.openOrderWindow.bind(item);
-  
+
 
   }
   // productsContainer.innerHTML = goodsList;
@@ -144,14 +146,14 @@ function showNextProducts(e) {
       const productsContainer = document.querySelector(".products__container");
       // goodsList = '';
       showButtonNextProducts(result);
-      
+
 
 
       for (let item of result) {
         item = new Product(item.id, item.title, item.p_count, item.p_seze, item.p_price, item.img_url);
         productsContainer.append(item.elem);
       }
-      
+
       // goodsList = '';
     });
 }

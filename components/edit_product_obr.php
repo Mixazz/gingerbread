@@ -3,7 +3,6 @@
 
 // Загрузка картинки на сервер
 $path = "/img/products/";
-
 // Обработка запроса
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Загрузка файла и вывод сообщения
@@ -13,11 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo 'Загрузка удачна ' . $_SERVER['DOCUMENT_ROOT'] . $path . $_FILES['picture']['name'];
 }
 
+$id = trim($_POST['id']);
 $title = trim($_POST['title']);
 $p_price = trim($_POST['price']);
 $p_count = trim($_POST['count']);
 $p_seze = trim($_POST['size']);
+$show_product = $_POST['show'];
 $img_url = $path . $_FILES['picture']['name'];
+
 
 if (empty($title) || empty($p_price) || empty($p_count) || empty($p_seze) || empty($img_url)) {
     exit("Не все поля заполнены");
@@ -26,12 +28,11 @@ if (empty($title) || empty($p_price) || empty($p_count) || empty($p_seze) || emp
 // Подключение к bd
 require_once('db.php');
 
-// добавление товара
-$result = $mysqli->query("INSERT INTO `products`(`title`, `p_price`, `p_count`, `p_seze` , `img_url`) VALUES ('$title','$p_price','$p_count','$p_seze' ,'$img_url')");
+$result = $mysqli->query("UPDATE `products` SET `title`='$title', `p_price`='$p_price', `p_count`='$p_count', `p_seze`='$p_seze', `show_product`='$show_product' WHERE `id`='$id'");
 
 
 if ($result) {
-    exit("<script>window.location.href='/index.php'</script>");
+    exit("Товар успешно изменен<script>window.location.href = '/admin/admin.php';</script>");
 } else {
-    exit("Не удалось добавить товар в базу данных");
+    exit("Не удалось внести изменения");
 }
