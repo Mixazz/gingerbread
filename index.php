@@ -1,14 +1,14 @@
-<?php
-require_once('components/db.php');
-// Выборка по категории
-// SELECT * FROM `products` JOIN `category-products` ON `products`.`id`=`category-products`.`id_product` WHERE `category-products`.`id_caregory`=9
-$result = $mysqli->query("SELECT * FROM `products` WHERE 1");
-$products = [];
-while ($row = $result->fetch_assoc()) {
+<!-- <?php
+      require_once('components/db.php');
+      // Выборка по категории
+      // SELECT * FROM `products` JOIN `category-products` ON `products`.`id`=`category-products`.`id_product` WHERE `category-products`.`id_caregory`=9
+      $result = $mysqli->query("SELECT * FROM `products` WHERE 1 LIMIT 0, 12");
+      $products = [];
+      while ($row = $result->fetch_assoc()) {
 
-  $products[] = $row;
-}
-?>
+        $products[] = $row;
+      }
+      ?> -->
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -22,6 +22,38 @@ while ($row = $result->fetch_assoc()) {
 </head>
 
 <body>
+  <div class="menu__mobile-wrap">
+    <div class="menu__mobile">
+      <h3>Меню</h3>
+      <ul>
+        <li>Главная</li>
+        <li>Расчитать стоимость</li>
+        <li>Каталаг пряников</li>
+      </ul>
+    </div>
+    <div class="menu__mobile-close">X</div>
+    <div class="menu__overlay"></div>
+  </div>
+  <div class="order-wrap">
+    <div class="order-form-wrap">
+      <div class="order-close">X</div>
+      <h4>Отправить заявку</h4>
+      <p>В форму заявки напишите ваше пожелание по пряникам их количеству, размерам и т.п.
+        или название желаемого набора.</p>
+      <p>И я свяжусь с вами в ближайшее время для уточнения информации.</p>
+      <form action="components/to_mail.php" method="POST" class="order-form">
+        <input type="text" class="input" name="name" placeholder="Введите ваше имя" required>
+        <input type="phone" class="input" name="phone" placeholder="Введите ваш телефон" required>
+        <textarea name="msg" class="input" id="" cols="30" rows="7"></textarea>
+        <input type="text" name="data-procuct" hidden>
+        <input type="submit" class="order-button" name="submit" value="Отправить заявку">
+
+      </form>
+    </div>
+
+    <div class="order-overlay"></div>
+  </div>
+
   <div class="progress-line"></div>
   <header class="header">
     <div class="header__container">
@@ -50,7 +82,6 @@ while ($row = $result->fetch_assoc()) {
                 пряников</a>
             </li>
           </ul>
-          <div class="header-contacts header-contacts_mobile"></div>
         </div>
       </div>
       <div class="header__rigth">
@@ -60,12 +91,23 @@ while ($row = $result->fetch_assoc()) {
             в WhatsApp:
           </p>
           <div class="header-socials__items">
-            <a class="header-socials__item header-socials__item_whatsapp" href="#"><img src="/img/wp.svg" alt="" /></a>
+            <a class="header-socials__item header-socials__item_whatsapp" href="#"><img src="img/wp.svg" alt="" /></a>
           </div>
         </div>
         <div class="header-menu__open">
           <div class="header-menu__icon"></div>
         </div>
+      </div>
+    </div>
+    <div class="bascet">
+      <div class="bascet-button">
+        <img src="img/button-card-image.svg" alt="">
+        <span class="bascet-span">Корзина</span>
+      </div>
+      <div class="bascet-goods-wrap">
+        <h4>Товары добавленные в корзину</h4>
+        <div class="bascet-goods"></div>
+        <div class="bascet-summ-wrap">Общая сумма заказа <span class="bascet-summ"></span> руб</div>
       </div>
     </div>
   </header>
@@ -126,7 +168,7 @@ while ($row = $result->fetch_assoc()) {
       <h2>Каталог пряников</h2>
       <div class="products-category">
         <ul class="products-category__list">
-          <li data-category="1000">Все пряники</li>
+          <li class="all-products" data-category="1000">Все пряники</li>
           <li data-category="1">Корпоративные</li>
           <li data-category="2">14 ферваля</li>
           <li data-category="3">23 ферваля</li>
@@ -145,37 +187,31 @@ while ($row = $result->fetch_assoc()) {
 
     <div class="container">
       <div class="products__container">
-        <?php foreach ($products as $item) : ?>
-
-          <div class="product">
-            <h3 class="product-h3">Пряники медали</h3>
-            <div class="product-img__wrap">
-              <img class="product-img" src="<?= $item['img_url'] ?>" alt="<?= $item['title'] ?>" />
-            </div>
-            <ul class="product__property">
-              <li class="product-count">
-                <p><?= $item['p_count'] ?></p>
-              </li>
-              <li class="product-size">
-                <p><?= $item['p_seze'] ?></p>
-              </li>
-              <li class="product-price">
-                <p><?= $item['p_price'] ?></p>
-              </li>
-            </ul>
-            <a href="#" class="product__btn">Заказать</a>
-          </div>
-        <?php endforeach; ?>
       </div>
-      <a href="" class="next-products">Показать еще</a>
+      <a href="" class="next-products" data-start="0">Показать еще</a>
     </div>
     </div>
   </section>
   <section class="clients"></section>
   <section class="order"></section>
   <footer>
-    <div class="conrainer">
-
+    <div class="container">
+      <div class="footer-block">
+        <div class="footer-logo">
+          <img src="img/logo.png" alt="Logo">
+        </div>
+        <nav class="footer-nav">
+          <a href="#" class="footer-link">Корпоративные заказы</a>
+          <a href="#" class="footer-link">Имбирные пряники на свадьбу</a>
+          <a href="#" class="footer-link">Пищевая печать на пряниках</a>
+          <a href="#" class="footer-link">Пряники ручной работы</a>
+        </nav>
+        <div class="social-links">
+          <a href="" class="social-link"><img src="img/instagram.svg" alt="instagram"></a>
+          <a href="" class="social-link"><img src="img/facebook.svg" alt="facebook"></a>
+          <a href="" class="social-link"><img src="img/vk.svg" alt="vkontakte"></a>
+        </div>
+      </div>
     </div>
   </footer>
 </body>
