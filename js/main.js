@@ -239,20 +239,23 @@ function showNextProducts(e) {
 }
 
 function showItemsBascet() {
-  if (localStorage.length == 0) {
-    bascetSpan.innerHTML = "Корзина пустая";
-    bascetGoods.innerHTML = '';
-    showBascetSumm.innerHTML = 0;
-    return false;
-  }
+  let basketLocalStorage = 0;
   bascetGoods.innerHTML = '';
   bascetSumm = 0;
   for (let i = 0; i < localStorage.length; i++) {
-
-    bascetSpan.innerHTML = `${localStorage.length} товар${declination(localStorage.length, ['', 'а', 'ов'])}`;
     let key = localStorage.key(i);
-    createProductsInBuscet(JSON.parse(localStorage.getItem(key)));
+    if (key.search("backet") == 0) {
+      basketLocalStorage++;
+      createProductsInBuscet(JSON.parse(localStorage.getItem(key)));
+    }
   }
+  bascetSpan.innerHTML = `${basketLocalStorage} товар${declination(basketLocalStorage, ['', 'а', 'ов'])}`;
+  if (basketLocalStorage == 0) {
+    bascetSpan.innerHTML = "Корзина пустая";
+    bascetGoods.innerHTML = '';
+    showBascetSumm.innerHTML = 0;
+  }
+
 }
 
 function createProductsInBuscet(product) {
