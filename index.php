@@ -99,7 +99,17 @@
         </div>
       </div>
     </div>
-
+    <div class="bascet">
+      <div class="bascet-button">
+        <img src="img/button-card-image.svg" alt="">
+        <span class="bascet-span">Корзина</span>
+      </div>
+      <div class="bascet-goods-wrap">
+        <h4>Товары добавленные в корзину</h4>
+        <div class="bascet-goods"></div>
+        <div class="bascet-summ-wrap">Общая сумма заказа <span class="bascet-summ"></span> руб</div>
+      </div>
+    </div>
   </header>
   <section class="promo">
     <div class="container">

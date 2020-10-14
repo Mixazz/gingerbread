@@ -24,10 +24,13 @@ session_start();
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="/index.php">На главную</a>
                     <?php if ($_SESSION['isAdmin']) : ?>
                         <a class="nav-item nav-link" href="add_product.php">Добавить товар</a>
                         <a class="nav-item nav-link" href="admin.php">Все товары</a>
+                        <a class="nav-item nav-link" href="admin.php">На главную</a>
                     <?php endif; ?>
+
 
                 </div>
             </div>

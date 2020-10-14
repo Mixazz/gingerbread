@@ -1,4 +1,4 @@
-import ProductRow from './ProductRow.js';
+import ProductRow from './adminProductRow.js';
 
 getAllProducts();
 

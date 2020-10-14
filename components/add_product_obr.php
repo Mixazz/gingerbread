@@ -31,7 +31,7 @@ $result = $mysqli->query("INSERT INTO `products`(`title`, `p_price`, `p_count`, 
 
 
 if ($result) {
-    exit("<script>window.location.href='/index.php'</script>");
+    exit("<script>window.location.href='/admin/admin.php'</script>");
 } else {
     exit("Не удалось добавить товар в базу данных");
 }
