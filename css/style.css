@@ -41,22 +41,27 @@ body {
   top: 100px;
 }
 .bascet-button {
-  background-color: #6d575d;
+  background-color: #643e48;
   padding: 10px;
   display: flex;
   align-items: center;
   cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 .bascet-goods-wrap {
   position: absolute;
   right: 0;
   top: 45px;
   width: 400px;
-  background-color: #6d575d;
+  background-color: #643e48;
   display: none;
   flex-direction: column;
   justify-content: start;
   padding: 10px;
+  overflow-y: auto;
+  max-height: 700px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 5px 5px 15px rgba(70, 70, 70, 0.5);
 }
 .bascet-goods-wrap h4 {
   width: 100%;
@@ -73,9 +78,19 @@ body {
 }
 
 .bascet-summ-wrap {
-  width: 100%;
   text-align: right;
   margin-top: 5px;
+}
+.bascet-summ-wrap p {
+  margin: 1px;
+}
+.bascet-summ-wrap a {
+  display: inline-block;
+  text-decoration: none;
+  color: #643e48;
+  margin-top: 5px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .bascet-button img {
@@ -292,22 +307,31 @@ body {
 .order-form-wrap {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   text-align: center;
   max-width: 600px;
   background: #643e48;
   padding: 20px;
   position: relative;
   color: #af9898;
+  border-radius: 5px;
 }
-
+.order-form textarea {
+  resize: vertical;
+  min-height: 30px;
+}
 .order-form-wrap h4 {
-  font-size: 24px;
+  font-size: 34px;
+  font-style: normal;
+  margin-bottom: 10px;
 }
 .order-form-wrap p {
   font-size: 16px;
 }
 
 .order-form {
+  width: 80%;
+  margin: auto;
   margin-top: 20px;
   display: flex;
   justify-content: center;
@@ -316,9 +340,12 @@ body {
 }
 .order-form .input {
   width: 100%;
-  padding: 5px;
+  padding: 10px;
   margin-bottom: 10px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
   border: 1px solid #643e48;
+  border-radius: 5px;
 }
 
 .order-button {
@@ -327,7 +354,11 @@ body {
   padding: 15px;
   background: #573838;
   color: #dacdcd;
-  border: 1px solid #643e48;
+  border: 1px solid #643e48b6;
+}
+
+.order-button:hover {
+  background: #b480809f;
 }
 .order-overlay {
   width: 100%;
@@ -360,7 +391,6 @@ body {
 
 .promo__button-container button {
   background-color: #643e48;
-  color: #fff;
   padding: 1rem;
   border: none;
   outline: none;
@@ -368,6 +398,15 @@ body {
   cursor: pointer;
   margin-left: 60px;
 }
+.promo__button-container button a {
+  text-decoration: none;
+  color: #fff;
+}
+.promo-advantages {
+  max-width: 70%;
+  margin: auto;
+}
+
 .promo-advantages__item {
   display: flex;
   align-items: center;
@@ -387,6 +426,10 @@ body {
   right: 0px;
   bottom: 0px;
   width: 100%;
+}
+
+.products {
+  padding-bottom: 30px;
 }
 
 .products h2 {
@@ -436,6 +479,7 @@ body {
 
 .products__container {
   margin: 3rem 0;
+
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -506,7 +550,13 @@ body {
   border: 2px solid #fff;
   color: #fff;
   text-decoration: none;
-  margin-bottom: 200px;
+}
+
+.order {
+  display: flex;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 30px;
 }
 
 .footer-block {
@@ -552,6 +602,19 @@ footer {
 .social-link:not(:last-child) {
   margin-right: 20px;
 }
+.order-bascet-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+.order-bascet-wrap h1 {
+  margin-bottom: 15px;
+}
+.order-form-wrap {
+  margin: auto;
+  width: 80%;
+}
 
 @media (max-width: 1200px) {
   .header__center {
@@ -559,5 +622,46 @@ footer {
   }
   .header-menu__open {
     display: flex;
+  }
+}
+@media (max-width: 1000px) {
+  .product {
+    max-width: 30%;
+  }
+}
+
+@media (max-width: 840px) {
+  .header-logo__description {
+    display: none;
+  }
+
+  .order-form {
+    min-width: 90%;
+  }
+}
+
+@media (max-width: 745px) {
+  .header-socials__title {
+    display: none;
+  }
+  .product {
+    max-width: 45%;
+  }
+  .promo__button-container button {
+    margin-left: 0;
+  }
+  .promo__button-container a {
+    color: #fff;
+  }
+  .promo h1 {
+    font-size: 2rem;
+  }
+  .promo {
+    display: block;
+    padding-top: 170px;
+  }
+
+  .order-form {
+    min-width: 100%;
   }
 }

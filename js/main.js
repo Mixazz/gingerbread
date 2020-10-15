@@ -131,166 +131,12 @@ window.onscroll = () => scroll();
 let categoryNumber;
 let pageProducts;
 let quantityProduct = 12;
+let bascetSumm = 0;
 
 let orderPopUp = document.querySelector(".order-wrap");
 let productBtn = document.querySelector(".product__btn");
 let orderClose = document.querySelector(".order-close");
-let orderOverlay = document.querySelector(".menu__overlay");
-
-orderClose.onclick = closeOrderWindow;
-
-// Показать товары
-let eventAll = {
-  target: {
-    dataset: {
-      category: "1000",
-    }
-  }
-}
-showFirstProducts(eventAll);
-
-let nextProductsBtn = document.querySelector('.next-products');
-if (nextProductsBtn) {
-  nextProductsBtn.onclick = showNextProducts;
-}
-
-let caregoryButtons = document.querySelectorAll('.products-category__list li');
-for (let categoryButton of caregoryButtons) {
-  categoryButton.onclick = showFirstProducts;
-
-}
-function closeOrderWindow() {
-  orderPopUp.style.display = "none";
-};
-
-function showFirstProducts(e) {
-  pageProducts = 0;
-  categoryNumber = e.target.dataset.category;
-  let response = fetch(`components/show_products.php?category=${categoryNumber}&page=${pageProducts}`)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (result) {
-      showButtonNextProducts(result);
-      createProducts(result);
-
-    });
-};
-
-function createProducts(goods) {
-
-  productsContainer.innerHTML = '';
-  // let goodsList = '';
-  if (goods.length == 0) {
-    productsContainer.innerHTML = `
-        <string>В данной категории нет товаров!</string>
-        `;
-    return;
-  }
-
-  for (let item of goods) {
-    item = new Product(item.id, item.title, item.p_count, item.p_seze, item.p_price, item.img_url, item.show_product);
-    // goodsList;
-    productsContainer.append(item.elem);
-    let orderBtn = item.elem.querySelector(".product__btn");
-    let addButtonBascet = item.elem.querySelector(".add_bascet");
-    orderBtn.onclick = item.openOrderWindow.bind(item);
-    addButtonBascet.onclick = item.addLocalItemBacket.bind(item);
-
-
-  }
-  // productsContainer.innerHTML = goodsList;
-  // goodsList = '';
-}
-
-function showButtonNextProducts(result) {
-  if (result.length < 13) {
-    nextProductsBtn.style.display = 'none';
-  } else {
-    pageProducts += 12;
-    result.pop();
-    nextProductsBtn.style.display = 'inline-block';
-  }
-
-}
-function createProduct(item) {
-  item = new Product(item.id, item.title, item.p_count, item.p_seze, item.p_price, item.img_url);
-  productsContainer.append(item.elem);
-  let orderBtn = item.elem.querySelector(".product__btn");
-  let addButtonBascet = item.elem.querySelector(".add_bascet");
-  orderBtn.onclick = item.openOrderWindow.bind(item);
-  addButtonBascet.onclick = item.addLocalItemBacket.bind(item);
-}
-
-function showNextProducts(e) {
-  e.preventDefault();
-  let response = fetch(`components/show_products.php?category=${categoryNumber}&page=${pageProducts}`)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (result) {
-      const productsContainer = document.querySelector(".products__container");
-      showButtonNextProducts(result);
-
-      for (let item of result) {
-        createProduct(item);
-      }
-    });
-}
-
-function showItemsBascet() {
-  let basketLocalStorage = 0;
-  bascetGoods.innerHTML = '';
-  bascetSumm = 0;
-  for (let i = 0; i < localStorage.length; i++) {
-    let key = localStorage.key(i);
-    if (key.search("backet") == 0) {
-      basketLocalStorage++;
-      createProductsInBuscet(JSON.parse(localStorage.getItem(key)));
-    }
-  }
-  bascetSpan.innerHTML = `${basketLocalStorage} товар${declination(basketLocalStorage, ['', 'а', 'ов'])}`;
-  if (basketLocalStorage == 0) {
-    bascetSpan.innerHTML = "Корзина пустая";
-    bascetGoods.innerHTML = '';
-    showBascetSumm.innerHTML = 0;
-  }
-
-}
-
-function createProductsInBuscet(product) {
-  if (!localStorage.length) {
-    return false;
-  }
-  let itemBascet = new ProductBascet(product.id, product.img_url, product.title, product.price, product.count);
-  bascetGoods.append(itemBascet.elem);
-  bascetSumm = bascetSumm + itemBascet.summProduct;
-  showBascetSumm.innerHTML = bascetSumm;
-  let itemCountButtinMines = itemBascet.elem.querySelector('.item-minus');
-  let itemCountButtinPlus = itemBascet.elem.querySelector('.item-plus');
-  let itemCountButtinDelete = itemBascet.elem.querySelector('.item-delete');
-  let itemCountChange = itemBascet.elem.querySelector('.item-count');
-
-  itemCountChange.addEventListener('change', itemBascet.countChange.bind(itemBascet))
-  itemCountButtinMines.addEventListener('click', itemBascet.countMinus.bind(itemBascet));
-  itemCountButtinPlus.addEventListener('click', itemBascet.countPlus.bind(itemBascet));
-  itemCountButtinDelete.addEventListener('click', itemBascet.countDelete.bind(itemBascet));
-
-}
-
-function declination(number, txt) {
-  var cases = [2, 0, 1, 1, 1, 2];
-  return txt[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
-}
-function scroll() {
-  const progressLine = document.querySelector('.progress-line');
-  progressLine.style.display = 'block';
-  let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-  let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  let scrolled = (winScroll / height) * 100;
-  progressLine.style.width = scrolled + "%";
-}
-let bascetSumm = 0;
+let orderOverlay = document.querySelector(".order-overlay");
 let productsContainer = document.querySelector(".products__container");
 let bascetSpan = document.querySelector('.bascet-span');
 let btnMenuOpen = document.querySelector(".header-menu__open");
@@ -301,6 +147,32 @@ let bascetGoods = document.querySelector('.bascet-goods');
 let showBascetSumm = document.querySelector(".bascet-summ");
 let buttonOpenBascet = document.querySelector(".bascet-button");
 let openBaccet = document.querySelector(".bascet-goods-wrap");
+let nextProductsBtn = document.querySelector('.next-products');
+let caregoryButtons = document.querySelectorAll('.products-category__list li');
+let bascet = document.querySelector('.bascet');
+let footerBascet = document.querySelector('.bascet-summ-wrap');
+
+
+orderClose.onclick = closeOrderWindow;
+orderOverlay.onclick = closeOrderWindow;
+
+// Показать товары при загрузке страницы
+let eventAll = {
+  target: {
+    dataset: {
+      category: "1000",
+    }
+  }
+}
+showFirstProducts(eventAll);
+
+if (nextProductsBtn) {
+  nextProductsBtn.onclick = showNextProducts;
+}
+
+for (let categoryButton of caregoryButtons) {
+  categoryButton.onclick = showFirstProducts;
+}
 
 buttonOpenBascet.onclick = function () {
   if (openBaccet.style.display == 'flex') {
@@ -308,9 +180,7 @@ buttonOpenBascet.onclick = function () {
   } else {
     openBaccet.style.display = 'flex';
   }
-
 }
-// showBascetSumm.innerHTML = +bascetSumm;
 
 btnMenuOpen.onclick = function () {
   mobileMenu.style.display = 'block';
@@ -322,13 +192,15 @@ mobileMenuOverlay.onclick = function () {
   closeMenu();
 }
 
-function closeMenu() {
-  mobileMenu.style.display = 'none';
-}
-
 if (localStorage.getItem("backet")) {
   array = JSON.parse(localStorage.getItem("array"));
   console.log(JSON.parse(localStorage.getItem("bascet")));
 }
 showItemsBascet();
 
+window.addEventListener('scroll', function () {
+  if (window.pageYOffset < 85) {
+    bascet.style.top = `${100 - window.pageYOffset}px`;
+  } else if ((window.pageYOffset > 85))
+    bascet.style.top = `15px`;
+})

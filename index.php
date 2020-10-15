@@ -18,7 +18,7 @@
   <title>Имбирные пряники ручной работы от AnutaCookie</title>
   <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="css/style.css" />
-  <script src="js/main.js" defer></script>
+
 </head>
 
 <body>
@@ -74,11 +74,11 @@
             </li>
 
             <li class="header-menu__list-item">
-              <a class="header-menu__list-link scroll-to header-menu__list-link_active" href="#buy-2">Расчитать
+              <a class="header-menu__list-link scroll-to header-menu__list-link_active" href="#order">Расчитать
                 стоимость</a>
             </li>
             <li class="header-menu__list-item">
-              <a class="header-menu__list-link scroll-to header-menu__list-link_active" href="#buy-2">Каталог
+              <a class="header-menu__list-link scroll-to header-menu__list-link_active" href="#products">Каталог
                 пряников</a>
             </li>
           </ul>
@@ -91,7 +91,7 @@
             в WhatsApp:
           </p>
           <div class="header-socials__items">
-            <a class="header-socials__item header-socials__item_whatsapp" href="#"><img src="img/wp.svg" alt="" /></a>
+            <a class="header-socials__item header-socials__item_whatsapp" href="https://wa.me/79055544848"><img src="img/wp.svg" alt="" /></a>
           </div>
         </div>
         <div class="header-menu__open">
@@ -107,7 +107,10 @@
       <div class="bascet-goods-wrap">
         <h4>Товары добавленные в корзину</h4>
         <div class="bascet-goods"></div>
-        <div class="bascet-summ-wrap">Общая сумма заказа <span class="bascet-summ"></span> руб</div>
+        <div class="bascet-summ-wrap">
+          <p>Общая сумма заказа <span class="bascet-summ"></span> руб</p>
+          <a href="order.php">Оформить заказ</a>
+        </div>
       </div>
     </div>
   </header>
@@ -155,7 +158,7 @@
           </div>
         </div>
         <div class="promo__button-container">
-          <button class="button">Быстрый расчет</button>
+          <button class="button"><a href="#order">Быстрый расчет</a></button>
         </div>
       </div>
     </div>
@@ -163,7 +166,7 @@
       <img class="img3" src="img/bg-after.png" alt="" />
     </div>
   </section>
-  <section class="products">
+  <section class="products" id="products">
     <div class="container">
       <h2>Каталог пряников</h2>
       <div class="products-category">
@@ -193,7 +196,21 @@
     </div>
   </section>
   <section class="clients"></section>
-  <section class="order"></section>
+  <section class="order" id="order">
+    <div class="order-form-wrap">
+      <h4>Отправить заявку</h4>
+      <p>В форму заявки напишите ваше пожелание по пряникам их количеству, размерам и т.п.</p>
+      <p>И я свяжусь с вами в ближайшее время для уточнения информации и расчета стоимости заказа</p>
+      <form action="components/to_mail.php" method="POST" class="order-form">
+        <input type="text" class="input" name="name" placeholder="Введите ваше имя" required>
+        <input type="phone" class="input" name="phone" placeholder="Введите ваш телефон" required>
+        <textarea name="msg" class="input" id="" cols="30" rows="7" placeholder="Напишите ваше вообщение"></textarea>
+        <input type="text" name="data-procuct" hidden>
+        <input type="submit" class="order-button" name="submit" value="Отправить заявку">
+
+      </form>
+    </div>
+  </section>
   <footer>
     <div class="container">
       <div class="footer-block">
@@ -214,6 +231,8 @@
       </div>
     </div>
   </footer>
+  <script src="js/functions.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>
